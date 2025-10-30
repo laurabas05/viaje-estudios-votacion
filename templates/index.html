@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fiesta Meter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #211d33;
+        color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .card {
+        background: rgba(9, 9, 20, 0.85);
+        border-radius: 14px;
+        padding: 2.5rem 3rem;
+        width: min(500px, 90%);
+        box-shadow: 0 18px 40px rgba(12, 12, 20, 0.9);
+      }
+
+      h1 {
+        margin-top: 0;
+        font-size: 2.4rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      p.tagline {
+        color: #c9c9f1;
+        margin-bottom: 2rem;
+        letter-spacing: 0.02em;
+      }
+
+      form {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      button {
+        background: linear-gradient(135deg, #ff6d8a, #ffb35a);
+        border: none;
+        border-radius: 10px;
+        color: #211d33;
+        font-weight: bold;
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 16px rgba(255, 110, 138, 0.35);
+      }
+
+      .scoreboard {
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .scoreboard h2 {
+        margin-top: 0;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        letter-spacing: 0.12em;
+      }
+
+      .scoreboard ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .scoreboard li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.35rem 0.15rem;
+        font-weight: 600;
+      }
+
+      .scoreboard span.rank {
+        color: #ff6d8a;
+      }
+
+      .total {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #b0b0da;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Fiesta Meter</h1>
+      <p class="tagline">
+        Lanza tu voto para el alma de la fiesta. Un voto, una chispa.
+      </p>
+      <form method="post">
+        {% for candidate, score in ranking %}
+        <button type="submit" name="vote" value="{{ candidate }}">
+          Votar por {{ candidate }}
+        </button>
+        {% endfor %}
+      </form>
+      <section class="scoreboard">
+        <h2>Marcador</h2>
+        <ul>
+          {% for candidate, score in ranking %}
+          <li>
+            <span class="rank">{{ candidate }}</span>
+            <span>{{ score }} votos</span>
+          </li>
+          {% endfor %}
+        </ul>
+        <p class="total">Total de votos: {{ total_votes }}</p>
+      </section>
+    </main>
+  </body>
+</html>
