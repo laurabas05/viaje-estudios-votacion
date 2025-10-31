@@ -3,7 +3,7 @@ from __future__ import annotations
 from flask import Flask, redirect, render_template, request, url_for
 
 
-app = Flask(__name__, template_folder="../templates")
+app = Flask(__name__, template_folder="templates")
 
 # Simple in-memory scoreboard; resets whenever the container restarts.
 SCORES = {
